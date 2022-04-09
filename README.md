@@ -25,5 +25,5 @@
 
 #Step 9 If the progress at the finnal then you are ready to use the VPS, open Remote Desktop Connection and copy the ip (ex: 0.tcp.ngrok.io:00000) and username, password
 
-#Step 10 Enjoy!
+#Step 10 Cilck connect and Enjoy!
 
