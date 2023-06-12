@@ -1,0 +1,37 @@
+name: Docker Install and Run
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Docker
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install docker.io
+
+      - name: Start Docker service
+        run: sudo service docker start
+
+      - name: Install ngrok
+        run: |
+          sudo apt-get -y install unzip
+          wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+          unzip ngrok-stable-linux-amd64.zip
+
+      - name: Run Docker command with ngrok
+        run: |
+          sudo docker run --rm -it --shm-size=512m -p 6901:6901 -e VNC_PW=password kasmweb/firefox:dev &
+          sleep 10
+          ./ngrok http 6901
